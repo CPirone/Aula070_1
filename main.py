@@ -6,9 +6,9 @@ app = Flask(__name__)
 app.secret_key = secrets.token_hex(16)
 
 
-MAILGUN_API_KEY = '-----'
-MAILGUN_DOMAIN = 'sandboxa----------------.mailgun.org'
-FIXED_RECIPIENT = ['fla-------@zohomail.com', 'cle-------.ifsp.edu.br']
+MAILGUN_API_KEY = '210c64d3afc140b5299c26db567b4686-911539ec-2745430c'
+MAILGUN_DOMAIN = 'sandboxa1af7d571cf747809126914a39c5e301.mailgun.org'
+FIXED_RECIPIENT = ['flaskaulasweb@zohomail.com', 'cleber.andre@aluno.ifsp.edu.br']
 
 def send_simple_message(name, message):
     response = requests.post(
@@ -29,7 +29,7 @@ def send_simple_message(name, message):
 def index():
     if request.method == 'POST':
         name = request.form['name']
-
+       
         response = send_simple_message(name, "Obrigado pelo submit na aula 70!")
         if response.status_code == 200:
             flash('Email enviado!', 'Sucesso')
