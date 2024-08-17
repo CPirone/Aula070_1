@@ -1,14 +1,14 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 import requests
-import secrets
+import secrets  
+import os  
 
 app = Flask(__name__)
 app.secret_key = secrets.token_hex(16)
 
-
-MAILGUN_API_KEY = '210c64d3afc140b5299c26db567b4686-911539ec-2745430c'
-MAILGUN_DOMAIN = 'sandboxa1af7d571cf747809126914a39c5e301.mailgun.org'
-FIXED_RECIPIENT = ['flaskaulasweb@zohomail.com', 'cleber.andre@aluno.ifsp.edu.br']
+MAILGUN_API_KEY = os.getenv('MAILGUN_API_KEY')
+MAILGUN_DOMAIN = os.getenv('MAILGUN_DOMAIN')
+FIXED_RECIPIENTS = os.getenv('FIXED_RECIPIENTS')
 
 def send_simple_message(name, message):
     response = requests.post(
@@ -16,7 +16,7 @@ def send_simple_message(name, message):
         auth=("api", MAILGUN_API_KEY),
         data={
             "from": f"Excited User <mailgun@{MAILGUN_DOMAIN}>",
-            "to": FIXED_RECIPIENT,
+            "to": FIXED_RECIPIENTS,
             "subject": f"Hello {name}!",
             "text": f"Hi {name},\n\n{message}"
         }
